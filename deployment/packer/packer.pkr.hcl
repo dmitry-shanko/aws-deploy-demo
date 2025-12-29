@@ -38,11 +38,13 @@ variable "cloudwatch_config_file_name" {
 }
 
 source "amazon-ebs" "trade_signals" {
-  region          = "ap-southeast-1"
-  instance_type   = "t3.micro"
-  ssh_username    = "ec2-user"
-  ami_name        = "trade-signals-app-{{timestamp}}"
-  ami_description = "Trade Signals App AMI"
+  region                      = "ap-southeast-1"
+  instance_type               = "t3.micro"
+  ssh_username                = "ec2-user"
+  ami_name                    = "trade-signals-app-{{timestamp}}"
+  ami_description             = "Trade Signals App AMI"
+  security_group_ids = ["sg-0e2b0c1ad71a16e31"]
+  associate_public_ip_address = true
 
   source_ami_filter {
     filters = {
