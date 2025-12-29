@@ -1,0 +1,16 @@
+[Unit]
+Description=Trade Signals App
+After=network.target
+
+[Service]
+User=ec2-user
+ExecStart=/usr/bin/java -jar $AMI_JAR_PATH
+SuccessExitStatus=143
+Restart=on-failure
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=trade-signals
+
+[Install]
+WantedBy=multi-user.target

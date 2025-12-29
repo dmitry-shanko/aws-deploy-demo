@@ -17,11 +17,14 @@ if [[ -z "$SERVICE_FILE_NAME" ]]; then
   exit 1
 fi
 
+TEMPLATE_FILE="$AMI_TEMP_PATH/$SERVICE_FILE_NAME"
+SERVICE_FILE="/etc/systemd/system/application.service"
+
 # Создаём директорию для unit (если не существует)
 sudo mkdir -p /etc/systemd/system
 
 # Копируем unit файл на AMI
-sudo cp "${AMI_TEMP_PATH}/${SERVICE_FILE_NAME}" /etc/systemd/system/application.service
+sudo envsubst < "$TEMPLATE_FILE" | sudo tee "$SERVICE_FILE" > /dev/null
 
 # Перезагружаем systemd и включаем сервис
 sudo systemctl daemon-reload
