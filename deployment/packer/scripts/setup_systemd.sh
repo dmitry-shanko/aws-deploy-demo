@@ -26,6 +26,9 @@ sudo mkdir -p /etc/systemd/system
 # Обновляем jar в service конфиге
 sudo sh -c "AMI_JAR_PATH='$AMI_JAR_PATH' envsubst < '$TEMPLATE_FILE' > '$SERVICE_FILE'"
 
+echo "[INFO] Copied systemd config from '$TEMPLATE_FILE' to '$SERVICE_FILE'"
+echo "[INFO] AMI_JAR_PATH='$AMI_JAR_PATH'"
+
 sudo chmod 644 "$SERVICE_FILE"
 
 # Не запускаем сервис, пока AMI строится

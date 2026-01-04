@@ -4,12 +4,12 @@ After=network.target
 
 [Service]
 User=ec2-user
-ExecStart=/usr/bin/java -jar $AMI_JAR_PATH
+ExecStart=/usr/bin/java -jar $AMI_JAR_PATH --logging.file.name=/opt/log/trade-signals-app/app.log
 SuccessExitStatus=143
 Restart=on-failure
 RestartSec=10
-StandardOutput=syslog
-StandardError=syslog
+StandardOutput=null
+StandardError=null
 SyslogIdentifier=trade-signals
 
 [Install]

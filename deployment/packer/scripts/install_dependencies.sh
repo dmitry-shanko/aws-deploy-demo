@@ -12,3 +12,5 @@ sudo yum install -y awslogs
 
 ### Установка нового CloudWatch Agent
 sudo yum install -y amazon-cloudwatch-agent
+
+echo "[INFO] Installed all required dependencies"

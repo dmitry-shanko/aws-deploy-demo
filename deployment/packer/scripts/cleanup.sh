@@ -6,3 +6,5 @@ if [[ -z "$AMI_TEMP_PATH" ]]; then
 fi
 
 sudo rm -rf "$AMI_TEMP_PATH"/*
+
+echo "[INFO] Path '$AMI_TEMP_PATH/*' cleaned"
