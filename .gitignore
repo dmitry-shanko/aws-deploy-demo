@@ -165,3 +165,10 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+
+# Terraform
+deployment/terraform/.terraform/
+deployment/terraform/.terraform.lock.hcl
+deployment/terraform/terraform.tfstate
+deployment/terraform/terraform.tfstate.backup
+deployment/terraform/terraform.crash.log
