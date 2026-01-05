@@ -27,6 +27,13 @@
     <local.repo>${user.home}/telegram-signals-builds</local.repo>
 
     <telegram.logback>1.3.0</telegram.logback>
+
+    <vpc.id>vpc-08e8306de4cf67fd1</vpc.id>
+    <subnet.id>subnet-0d3af885003883d67</subnet.id>
+    <sg.id>sg-0e2b0c1ad71a16e31</sg.id>
+    <instance.profile>trade-signals-ec2-role</instance.profile>
+    <instance.type>t3.micro</instance.type>
+    <ssh.keyname>trade-signals</ssh.keyname>
   </properties>
 
   <dependencies>
@@ -89,7 +96,7 @@
 
   <profiles>
     <profile>
-      <id>aws-terraform-deploy</id>
+      <id>aws-packer</id>
 
       <properties>
         <artifact.path>${local.repo}/${project.groupId}/${project.artifactId}/${project.version}</artifact.path>
@@ -124,9 +131,9 @@
                 </configuration>
               </execution>
 
-              <!-- 2. Запуск деплоя -->
+              <!-- 2. Запуск Packer -->
               <execution>
-                <id>run-deploy</id>
+                <id>run-packer</id>
                 <phase>deploy</phase>
                 <goals>
                   <goal>exec</goal>
@@ -134,14 +141,48 @@
                 <configuration>
                   <executable>bash</executable>
                   <arguments>
-                    <argument>${project.basedir}/deployment/deploy.sh</argument>
+                    <argument>${project.basedir}/deployment/run_packer.sh</argument>
                     <argument>${deploy.env.file}</argument>
                   </arguments>
                 </configuration>
               </execution>
             </executions>
           </plugin>
+        </plugins>
+      </build>
+    </profile>
 
+    <profile>
+      <id>aws-terraform</id>
+      <build>
+        <plugins>
+          <!-- Генерация deploy.env с полной дорогой до JAR -->
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <executions>
+              <!-- 3. Запуск Terraform -->
+              <execution>
+                <id>terraform-apply</id>
+                <phase>deploy</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>bash</executable>
+                  <arguments>
+                    <argument>${project.basedir}/deployment/run_terraform.sh</argument>
+                    <argument>${vpc.id}</argument>
+                    <argument>${subnet.id}</argument>
+                    <argument>${sg.id}</argument>
+                    <argument>${instance.profile}</argument>
+                    <argument>${instance.type}</argument>
+                    <argument>${ssh.keyname}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
         </plugins>
       </build>
     </profile>
