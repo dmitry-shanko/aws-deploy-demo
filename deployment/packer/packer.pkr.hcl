@@ -55,7 +55,7 @@ source "amazon-ebs" "trade_signals" {
   }
 
   tags = {
-    App = "trade-signals"
+    trade-signals = "trade-signals-ami"
   }
 }
 
