@@ -170,5 +170,6 @@ Desktop.ini
 deployment/terraform/.terraform/
 deployment/terraform/.terraform.lock.hcl
 deployment/terraform/terraform.tfstate
+deployment/terraform/terraform.tfstate.lock.info
 deployment/terraform/terraform.tfstate.backup
 deployment/terraform/terraform.crash.log
