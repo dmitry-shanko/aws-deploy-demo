@@ -4,7 +4,8 @@ After=network.target
 
 [Service]
 User=ec2-user
-ExecStart=/usr/bin/java -jar $AMI_JAR_PATH --logging.file.name=/opt/log/trade-signals-app/app.log
+EnvironmentFile=$JVM_OPTIONS_FULL_PATH
+ExecStart=/usr/bin/java -jar $AMI_JAR_PATH
 SuccessExitStatus=143
 Restart=on-failure
 RestartSec=10

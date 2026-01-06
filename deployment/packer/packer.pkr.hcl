@@ -32,6 +32,11 @@ variable "app_service_file_name" {
   default = "application.service"
 }
 
+variable "jvm_options_file_name" {
+  type    = string
+  default = "jvm.options"
+}
+
 variable "cloudwatch_config_file_name" {
   type    = string
   default = "cloudwatch-config.json"
@@ -85,12 +90,18 @@ build {
     destination = "${var.ami_temp_path}/${var.app_service_file_name}"
   }
 
+  provisioner "file" {
+    source      = "${path.root}/../configs/${var.jvm_options_file_name}"
+    destination = "${var.ami_temp_path}/${var.jvm_options_file_name}"
+  }
+
   provisioner "shell" {
     script = "${path.root}/scripts/setup_systemd.sh"
     environment_vars = [
       "AMI_JAR_PATH=${var.ami_app_path}/${var.local_jar_name}",
       "AMI_TEMP_PATH=${var.ami_temp_path}",
-      "SERVICE_FILE_NAME=${var.app_service_file_name}"
+      "SERVICE_FILE_NAME=${var.app_service_file_name}",
+      "JVM_OPTIONS_FILE=${var.jvm_options_file_name}"
     ]
   }
 
