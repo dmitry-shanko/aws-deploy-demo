@@ -15,7 +15,7 @@ resource "aws_instance" "trade_signals" {
 # Attach Elastic IP
 resource "aws_eip_association" "trade_signals" {
   instance_id   = aws_instance.trade_signals.id
-  allocation_id = "eipalloc-0e85ac164eaa9603b" #TODO - вставить сюда ИД elastic IP
+  allocation_id = "eipalloc-0b91a8669dcb35b07" #TODO - вставить сюда ИД elastic IP
 
   depends_on = [aws_instance.trade_signals]
 }
