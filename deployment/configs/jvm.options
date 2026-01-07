@@ -1,14 +1,8 @@
-# Memory
--Xms512m
--Xmx1024m
-
-# Logging
--Dlogging.file.name=/opt/log/trade-signals-app/app.log
-
-# JMX
--Dcom.sun.management.jmxremote
--Dcom.sun.management.jmxremote.port=9010
--Dcom.sun.management.jmxremote.rmi.port=9010
--Dcom.sun.management.jmxremote.authenticate=false
--Dcom.sun.management.jmxremote.ssl=false
--Djava.rmi.server.hostname=127.0.0.1
+JVM_OPTS="-Xms512m \
+-Xmx1024m \
+-Dcom.sun.management.jmxremote \
+-Dcom.sun.management.jmxremote.port=9010 \
+-Dcom.sun.management.jmxremote.rmi.port=9010 \
+-Dcom.sun.management.jmxremote.authenticate=false \
+-Dcom.sun.management.jmxremote.ssl=false \
+-Djava.rmi.server.hostname=127.0.0.1"

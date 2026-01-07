@@ -31,11 +31,13 @@ JVM_OPTIONS_FULL_PATH="$JVM_OPTIONS_PATH/$JVM_OPTIONS_FILE"
 sudo mkdir -p /etc/systemd/system
 
 sudo mkdir -p "$JVM_OPTIONS_PATH"
+sudo mv "$AMI_TEMP_PATH"/"$JVM_OPTIONS_FILE" "$JVM_OPTIONS_FULL_PATH"
+
+source "$JVM_OPTIONS_FULL_PATH"
+export JVM_OPTS
 
 # Обновляем jar в service конфиге
-sudo sh -c "AMI_JAR_PATH='$AMI_JAR_PATH' envsubst < '$TEMPLATE_FILE' > '$SERVICE_FILE'"
-
-sudo mv "$AMI_TEMP_PATH"/"$JVM_OPTIONS_FILE" "$JVM_OPTIONS_FULL_PATH"
+sudo sh -c "AMI_JAR_PATH='$AMI_JAR_PATH' JVM_OPTIONS_FULL_PATH='$JVM_OPTIONS_FULL_PATH' JVM_OPTS='$JVM_OPTS' envsubst < '$TEMPLATE_FILE' > '$SERVICE_FILE'"
 
 echo "[INFO] Copied systemd config from '$TEMPLATE_FILE' to '$SERVICE_FILE'"
 echo "[INFO] Copied jvm.options from '$AMI_TEMP_PATH'/'$JVM_OPTIONS_FILE' to '$JVM_OPTIONS_FULL_PATH'"
