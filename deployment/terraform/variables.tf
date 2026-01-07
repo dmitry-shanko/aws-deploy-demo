@@ -1,8 +1,3 @@
-variable "vpc_id" {
-  type        = string
-  description = "Existing VPC ID"
-}
-
 variable "subnet_id" {
   type        = string
   description = "Existing Subnet ID"
@@ -21,6 +16,11 @@ variable "instance_profile" {
 variable "instance_type" {
   type        = string
   description = "EC2 Instance Type"
+}
+
+variable "elastic_ip_id" {
+  type        = string
+  description = "Elastic IP ID for EC2"
 }
 
 variable "key_name" {

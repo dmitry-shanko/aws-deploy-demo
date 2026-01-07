@@ -33,6 +33,7 @@
     <sg.id>sg-0e2b0c1ad71a16e31</sg.id>
     <instance.profile>trade-signals-ec2-role</instance.profile>
     <instance.type>t3.micro</instance.type>
+    <elastic.ip.id>eipalloc-0b91a8669dcb35b07</elastic.ip.id>
     <ssh.keyname>trade-signals</ssh.keyname>
   </properties>
 
@@ -177,6 +178,7 @@
                     <argument>${sg.id}</argument>
                     <argument>${instance.profile}</argument>
                     <argument>${instance.type}</argument>
+                    <argument>${elastic.ip.id}</argument>
                     <argument>${ssh.keyname}</argument>
                   </arguments>
                 </configuration>
