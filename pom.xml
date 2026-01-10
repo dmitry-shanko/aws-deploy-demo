@@ -28,7 +28,6 @@
 
     <telegram.logback>1.3.0</telegram.logback>
 
-    <vpc.id>vpc-08e8306de4cf67fd1</vpc.id>
     <subnet.id>subnet-0d3af885003883d67</subnet.id>
     <sg.id>sg-0e2b0c1ad71a16e31</sg.id>
     <instance.profile>trade-signals-ec2-role</instance.profile>
@@ -173,7 +172,6 @@
                   <executable>bash</executable>
                   <arguments>
                     <argument>${project.basedir}/deployment/run_terraform.sh</argument>
-                    <argument>${vpc.id}</argument>
                     <argument>${subnet.id}</argument>
                     <argument>${sg.id}</argument>
                     <argument>${instance.profile}</argument>
